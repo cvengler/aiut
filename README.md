@@ -11,8 +11,11 @@ You can find an online version of this at [amiusingtor.net](https://amiusingtor.
 ./run.sh 127.0.0.1:8080
 ```
 
+## Known Issues
+
+This program is stupidly simple, meaning it is too stupid to distinguish exit relays from middle relays.
+Therefore, if you access this side from an IP that runs a middle relay, you will get a false-positive.
+
 ## TODO
 
-* Make it possible to run this behind a reverse proxy (`X-Forwarded-For`)
 * Write a tool to download the consensus from an authority, validate it and write it to a text file
-* Write a shellscript wrapper around it
