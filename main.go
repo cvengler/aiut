@@ -33,9 +33,16 @@ func parseConsensus(input string) (*map[string]bool, error) {
 }
 
 func root(w http.ResponseWriter, req *http.Request) {
-	host, _, err := net.SplitHostPort(req.RemoteAddr)
-	if err != nil {
-		log.Fatal(err)
+	var host string
+	host = req.Header.Get("X-Forwarded-For")
+
+	// If the X-Forwarded-For header is not set, obtain the IP from the network stack
+	if host == "" {
+		hostTmp, _, err := net.SplitHostPort(req.RemoteAddr)
+		if err != nil {
+			log.Fatal(err)
+		}
+		host = hostTmp
 	}
 
 	_, is_tor := (*ips)[host]
