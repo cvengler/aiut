@@ -8,7 +8,7 @@ You can find an online version of this at [amiusingtor.net](https://amiusingtor.
 ## Usage
 
 ```sh
-./run.sh
+./run.sh 127.0.0.1:8080
 ```
 
 ## TODO
