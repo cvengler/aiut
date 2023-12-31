@@ -29,6 +29,13 @@ func parseConsensus(input string) (*map[string]bool, error) {
 		ips[ip6] = true
 	}
 
+	re = regexp.MustCompile("\nExitAddress ([\\d.]+) ([\\d-]+) ([\\d:]+)\n")
+	matches = re.FindAllStringSubmatch(input, -1)
+	for _, match := range matches {
+		exitAddress := match[1]
+		ips[exitAddress] = true
+	}
+
 	return &ips, nil
 }
 
