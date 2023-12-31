@@ -41,6 +41,7 @@ func root(w http.ResponseWriter, req *http.Request) {
 		hostTmp, _, err := net.SplitHostPort(req.RemoteAddr)
 		if err != nil {
 			log.Fatal(err)
+			return
 		}
 		host = hostTmp
 	}
