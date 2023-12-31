@@ -45,8 +45,8 @@ func root(w http.ResponseWriter, req *http.Request) {
 		host = hostTmp
 	}
 
-	_, is_tor := (*ips)[host]
-	if is_tor {
+	_, isTor := (*ips)[host]
+	if isTor {
 		io.WriteString(w, "yes "+host+"\n")
 	} else {
 		io.WriteString(w, "no "+host+"\n")
