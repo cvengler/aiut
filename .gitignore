@@ -18,6 +18,7 @@
 !LICENSE
 
 !run.sh
+!*.nix
 
 # !Makefile
 
