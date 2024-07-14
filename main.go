@@ -61,6 +61,25 @@ func root(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func ip(w http.ResponseWriter, req *http.Request) {
+	// TODO: Remove duplicate code
+
+	var host string
+	host = req.Header.Get("X-Forwarded-For")
+
+	// If the X-Forwarded-For header is not set, obtain the IP from the network stack
+	if host == "" {
+		hostTmp, _, err := net.SplitHostPort(req.RemoteAddr)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		host = hostTmp
+	}
+
+	io.WriteString(w, host)
+}
+
 func main() {
 	addr := os.Args[1]
 
@@ -78,6 +97,7 @@ func main() {
 
 	log.Println("Listening on " + addr)
 	http.HandleFunc("/", root)
+	http.HandleFunc("/ip", ip)
 	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		log.Panic(err)
